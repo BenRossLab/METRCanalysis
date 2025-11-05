@@ -4,6 +4,7 @@ Files in this repository to be run in the following order:
 3. prelimCombo
 
 REQUIRED INPUTS
+
 prelimNGS requires the following as input:
 1. A working repository (default ~/Desktop/Wannigan_METRC/ )
 2. Folder within working repository containing all .fastq files (default ~/Desktop/Wannigan_METRC/raw/16S/ )
@@ -15,6 +16,7 @@ prelimCulture requires the following as input:
 prelimCombo requires the following as input:
 
 BRIEF DESCRIPTION OF PROCESS
+
 prelimNGS processing includes:
 1. standard DADA2 pipeline
 2. assigning taxonomy using a modified silva_nr_v132 database
