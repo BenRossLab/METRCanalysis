@@ -7,14 +7,23 @@ REQUIRED INPUTS
 
 prelimNGS requires the following as input:
 1. A working repository (default "~/Desktop/Wannigan_METRC/")
-2. Folder within working repository containing all .fastq files (default "~/Desktop/Wannigan_METRC/raw/16S/")
-3. .csv file containing sample metadata listed with unique sampleIDs in first column (default "~/Desktop/Wannigan_METRC/raw/table_map.csv")
-4. .fa file containing reference taxonomy database (default "~/Masters/silva_nr_v132_train_set_RossMod.fa")
-5. .csv file containing a list of sequences to be assigned to Homo sapiens (default "~/Desktop/Wannigan_METRC/raw/list_homoASVs.csv")
+2. "~/Desktop/Wannigan_METRC/raw/16S/" : a folder within working repository containing all .fastq files
+3. "~/Desktop/Wannigan_METRC/raw/table_map.csv" : a data table containing sample metadata listed with unique sampleIDs in first column
+4. "~/Masters/silva_nr_v132_train_set_RossMod.fa" : a reference taxonomy database
+5. "~/Desktop/Wannigan_METRC/raw/list_homoASVs.csv" : a list of sequences to be assigned to Homo sapiens
 
 prelimCulture requires the following as input:
 
 prelimCombo requires the following as input:
+1. "~/Desktop/Wannigan_METRC/raw/table_map.csv" : a data table containing metadata for all samples
+2. "~/Desktop/Wannigan_METRC/outputPrelim/table_compileCulture.csv" : a data table containing compiled culture data
+3. "~/Desktop/Wannigan_METRC/raw/table_spp.csv" : a data table containing species descriptions
+4. 
+5. "~/Desktop/Wannigan_METRC/outputPrelim/physeqR.RData : a phyloseq object containing paired and trimmed 16S reads
+6. "~/Desktop/Wannigan_METRC/outputPrelim/table_cultureBase.csv" : a data table containing baseline culture data
+7. "~/Desktop/Wannigan_METRC/outputPrelim/table_cultureFU.csv" : a data table containing follow-up culture data
+8. 
+9. "~/Masters/color_palettes.R" : an .R file containing user-defined color palettes
 
 BRIEF DESCRIPTION OF PROCESS
 
