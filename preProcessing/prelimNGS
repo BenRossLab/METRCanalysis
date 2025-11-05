@@ -15,6 +15,7 @@
 #####################################################################
 # R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
 # All code written by Emily Ann McClure. No AI was used at any stage in writing or editing this code. 
+# github.com/mcclure51e/
 ########## Call libraries for use ##########
 # Packages from CRAN
 library("ggplot2") # version 4.0.0
