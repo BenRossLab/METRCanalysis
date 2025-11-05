@@ -29,3 +29,6 @@ prelimNGS processing includes:
 prelimCulture processing includes:
 
 prelimCombo processing includes:
+
+All code in the METRCanalysis repository was written by Emily Ann McClure. No AI was used at any stage in writing this code.
+
