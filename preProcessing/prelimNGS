@@ -1,4 +1,3 @@
-##### code written by Emily Ann McClure for use by the Ross lab. No AI was used to produce this code
 ##########################################################################################################
 ##### DESCRIPTION                                                                                    #####
 ##### Code for preliminary processing of .fastq files from Illumina sequencing. Processing includes: #####
@@ -15,6 +14,7 @@
 ########## Processing Set −up #######################################
 #####################################################################
 # R version 4.5.2 (2025-10-31) -- "[Not] Part in a Rumble"
+# All code written by Emily Ann McClure. No AI was used at any stage in writing or editing this code. 
 ########## Call libraries for use ##########
 # Packages from CRAN
 library("ggplot2") # version 4.0.0
@@ -284,4 +284,4 @@ write.csv(otu_table(phyT.bacteria),"outputPrelim/table_otuBacteriaTransform.csv"
 ##### You have now successfully imported all the raw data into R and performed preliminary clean-up. #####
 ##### You are ready to proceed with further analysis                                                 #####
 ##########################################################################################################
-##### code written by Emily Ann McClure for use by the Ross lab. No AI was used to produce this code
+##### All code written by Emily Ann McClure. No AI was used at any stage in writing or editing this code. 
