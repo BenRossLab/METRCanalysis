@@ -127,6 +127,7 @@ MAP = sample_data(table_map) # assigns metadata table
 physeq = phyloseq(OTU, TAX, MAP) # prepare phyloseq object
 
 ### add data to taxonomy table ###
+table_spp <- data.frame(read.csv("raw/table_SppDescription.csv", header = TRUE, check.names=FALSE)) # reads csv file into data.frame with row names in column 1
 bind.asv <- data.frame(cbind(tax_table(physeq), paste0("ASV", seq(ntaxa(physeq))))) # add column listing ASVs numerically
 bind.seq <- cbind(bind.asv, row.names(tax_table(physeq))) # add column listing ASV sequences
 bind.o <- cbind(bind.seq, seq(ntaxa(physeq))) # adding a column for sorting table later
