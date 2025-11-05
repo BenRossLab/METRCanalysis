@@ -123,18 +123,31 @@ save(taxRaw,file=("outputPrelim/output_taxRaw.RData")) # Save the phyloseq data 
 
 OTU = otu_table(OTUraw, taxa_are_rows=FALSE) # assigns ASV table from trimmed DADA output
 TAX = tax_table(taxRaw) # assigns taxonomy table
-MAP = sample_data(table_map) # reads csv file into data.frame with row names in column 1
+MAP = sample_data(table_map) # assigns metadata table
 physeq = phyloseq(OTU, TAX, MAP) # prepare phyloseq object
 
-### create and assign ASV numbers to consensus sequences for easier reference ###
-ASV <- paste0("ASV", seq(ntaxa(physeq))) 
-Sequence <- row.names(tax_table(physeq)) 
-bind.asv <- cbind(tax_table(physeq),ASV)
-bind.seq <- cbind(bind.asv,Sequence) 
-TAX2 = tax_table(as.matrix(bind.seq)) # define new taxonomy table
-colnames(TAX2) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species","Strain","ASV","Sequence")
-physeqR = phyloseq(OTU, TAX2, MAP) # prepare phyloseq object modified with ASV numbers
-taxa_names(physeqR) <- tax_table(physeqR)[,"ASV"]
+### add data to taxonomy table ###
+bind.asv <- data.frame(cbind(tax_table(physeq), paste0("ASV", seq(ntaxa(physeq))))) # add column listing ASVs numerically
+bind.seq <- cbind(bind.asv, row.names(tax_table(physeq))) # add column listing ASV sequences
+bind.o <- cbind(bind.seq, seq(ntaxa(physeq))) # adding a column for sorting table later
+bind.length <- cbind(bind.o, nchar(bind.o[,10])) # add a column listing length of sequences
+bind.count <- cbind(bind.length, taxa_sums(physeq)) # add a column listing total reads for ASV
+bind.prev <- cbind(bind.count, rowSums(t(otu_table(physeq)) != 0)) # add a column listing total number of samples in which ASV appears
+bind.prevSample <- cbind(bind.prev, rowSums(t(otu_table(subset_samples(physeq, Control%in%c("sample","positive")))) != 0)) # add a column listing total number of samples (excluding controls) in which ASV appears
+bind.CP <- cbind(bind.prevSample, as.numeric(bind.prevSample[,13]) / as.numeric(bind.prevSample[,14])) # calculate ~average reads/sample
+colnames(bind.CP) <- c("Kingdom","Phylum","Class","Order","Family","Genus","Species","Strain","ASV",
+                       "Sequence","Sort","Length","Count","Prevalence","PrevSamples","CP") # rename columns
+bind.sppData2 <- merge(bind.CP, table_spp[,c("pathogenStatus","commonSource","commonSourceSpecific","atmosphere","Genus","Species")], by=c("Genus","Species"), all.x=TRUE) # add extra info about species
+bind.sppData <- bind.sppData2[order(as.numeric(bind.sppData2$Sort)), ] # put back in original order (merge function above scrambles order)
+bind.sppData$atmosphere <- with(bind.sppData, ifelse(Genus=="Escherichia/Shigella" & is.na(Species), atmosphere=="aerobic",
+                                                     ifelse(Genus=="Allorhizobium-Neorhizobium-Pararhizobium-Rhizobium" & is.na(Species), atmosphere=="aerobic",
+                                                            atmosphere))) # correct a few atmosphere assignments
+rownames(bind.sppData) <- bind.sppData$ASV # reassign ASV names
+bind.mod <- bind.sppData[,c("Kingdom","Phylum","Class","Order","Family","Genus","Species","Strain","ASV","Length","Count",
+                            "Prevalence","PrevSamples","CP","pathogenStatus","commonSource","commonSourceSpecific","atmosphere","Sequence")] # rename columns
+TAX2 = tax_table(as.matrix(bind.mod)) # define new taxonomy table
+taxa_names(physeq) <- tax_table(TAX2)[,"ASV"]
+physeqR = phyloseq(otu_table(physeq), TAX2, MAP) # prepare phyloseq object modified with ASV numbers
 
 ################################################################################################
 ##### Correct a few non=specific sequences and other mis-identifications in taxonomy table #####
