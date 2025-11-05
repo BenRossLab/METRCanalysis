@@ -6,10 +6,11 @@ Files in this repository to be run in the following order:
 REQUIRED INPUTS
 
 prelimNGS requires the following as input:
-1. A working repository (default ~/Desktop/Wannigan_METRC/ )
-2. Folder within working repository containing all .fastq files (default ~/Desktop/Wannigan_METRC/raw/16S/ )
-3. .csv file containing sample metadata listed with unique sampleIDs in first column (default ~/Desktop/Wannigan_METRC/raw/table_map.csv )
-4. .csv file containing a list of sequences to be assigned to Homo sapiens (default ~/Desktop/Wannigan_METRC/raw/list_homoASVs.csv )
+1. A working repository (default "~/Desktop/Wannigan_METRC/")
+2. Folder within working repository containing all .fastq files (default "~/Desktop/Wannigan_METRC/raw/16S/")
+3. .csv file containing sample metadata listed with unique sampleIDs in first column (default "~/Desktop/Wannigan_METRC/raw/table_map.csv")
+4. .fa file containing reference taxonomy database (default "~/Masters/silva_nr_v132_train_set_RossMod.fa")
+5. .csv file containing a list of sequences to be assigned to Homo sapiens (default "~/Desktop/Wannigan_METRC/raw/list_homoASVs.csv")
 
 prelimCulture requires the following as input:
 
